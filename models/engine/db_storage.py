@@ -71,6 +71,10 @@ class DBStorage:
         Session = scoped_session(sess_factory)
         self.__session = Session
 
+    def close(self):
+        """call remove() method on the private session attribute"""
+        self.__session.remove()
+
     def get(self, cls, id):
         """The get Function"""
         try:
@@ -81,8 +85,3 @@ class DBStorage:
     def count(self, cls=None):
         """The Count Function"""
         return self.__session.query(cls).count()
-
-
-def close(self):
-    """call remove() method on the private session attribute"""
-    self.__session.remove()
