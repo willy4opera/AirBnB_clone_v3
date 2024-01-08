@@ -1,5 +1,7 @@
 #!/usr/bin/python3
-""" Index """
+
+"""Here, we write our Index file """
+
 from models.amenity import Amenity
 from models.city import City
 from models.place import Place
@@ -19,12 +21,12 @@ def status():
 
 @app_views.route('/stats', methods=['GET'], strict_slashes=False)
 def number_objects():
-    """ Retrieves the number of each objects by type """
-    classes = [Amenity, City, Place, Review, State, User]
-    names = ["amenities", "cities", "places", "reviews", "states", "users"]
+    """ Here, we retrieved the number of each objects by type """
+    dev_class = [Amenity, City, Place, Review, State, User]
+    dev_name = ["amenities", "cities", "places", "reviews", "states", "users"]
 
-    num_objs = {}
-    for i in range(len(classes)):
-        num_objs[names[i]] = storage.count(classes[i])
+    object_n = {}
+    for val in range(len(dev_class)):
+        object_n[dev_name[val]] = storage.count(dev_class[val])
 
-    return jsonify(num_objs)
+    return jsonify(object_n)
