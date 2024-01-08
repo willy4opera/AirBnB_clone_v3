@@ -1,6 +1,7 @@
 #!/usr/bin/python3
 
-"""Here, we defined the objects that handle all default RestFul API actions for States """
+"""Here, we defined the objects that handle all
+default RestFul API actions for States """
 
 from models.state import State
 from models import storage
@@ -30,7 +31,8 @@ def get_state(state_id):
     if not dev_state:
         abort(404)
 
-    return jsonify(state.to_dict())
+    renderdata = jsonify(dev_state.to_dict())
+    return renderdata
 
 
 @app_views.route('/states/<state_id>', methods=['DELETE'],
@@ -51,6 +53,7 @@ def delete_state(state_id):
     renderdata = make_response(jsonify({}), 200)
     return renderdata
 
+
 @app_views.route('/states', methods=['POST'], strict_slashes=False)
 @swag_from('documentation/state/post_state.yml', methods=['POST'])
 def post_state():
@@ -68,6 +71,7 @@ def post_state():
     instance.save()
     renderdata = make_response(jsonify(instance.to_dict()), 201)
     return renderdata
+
 
 @app_views.route('/states/<state_id>', methods=['PUT'], strict_slashes=False)
 @swag_from('documentation/state/put_state.yml', methods=['PUT'])
